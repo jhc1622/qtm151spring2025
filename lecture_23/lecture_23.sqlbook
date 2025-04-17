@@ -36,6 +36,7 @@ panel on the left:
 
 Delete existing table
 -- SQLBook: Code
+-- Active: 1736962099680@@127.0.0.1@5432@jackchapon
 -- Active: 1710903290079@@127.0.0.1@5432@postgres
 -- If the table already exists we can drop it:
 -- If it doesn't exist nothing happens
@@ -49,6 +50,7 @@ DROP TABLE IF EXISTS drivers;
 
 Create empty table from codebook
 -- SQLBook: Code
+-- Active: 1736962099680@@127.0.0.1@5432@jackchapon
 -- Create empty TABLE called "drivers"
 -- This example has five arguments separated by a comma
 -- that contain the "column_name" and "column_type", respectively
@@ -59,6 +61,7 @@ CREATE TABLE drivers(
     nationality varchar(15),
     victories int
 );    
+--varchar(30) and varchar(15) are the maximum number of characters in the variable names
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -89,6 +92,8 @@ $\qquad$ <img src="figures/view_table_sql.png" alt="drawing" width="350"/>
 -- Click "refresh" to see changes
 -- The pencil button edits column attributes
 -- The three-stripes button opens the table
+
+
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -100,8 +105,9 @@ Try it yourself!
 -- Select a new driver id (needs to be unique)
 -- Make sure to deparate arguments by a semicolon!
 
-
-
+INSERT INTO drivers VALUES (5, 'Max Verstappen','Dutch',64);
+INSERT INTO drivers VALUES (6, 'Ayrton Senna','Brazilian',41);
+INSERT INTO drivers VALUES (7, 'Alain Prost','French',51);
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> II. Dataset Operations </span>
@@ -133,7 +139,7 @@ WHERE nationality = 'German';
 
 -- Evalute OR conditions
 SELECT * FROM drivers
-WHERE (nationality = 'Colombian') OR (nationality = 'German');
+WHERE (nationality = 'French') OR (nationality = 'German');
 
 -- Evaluate AND conditions
 SELECT * FROM drivers
@@ -153,7 +159,8 @@ SELECT SUM(victories) AS sum_victories,
        AVG(victories) AS mean_victories,
        MIN(victories) AS min_victories,
        MAX(victories) AS max_victories
-FROM drivers;
+FROM drivers
+
 -- SQLBook: Markup
 <font size="5"> 
 
@@ -188,8 +195,9 @@ Try it yourself!
 with more than 60 victories
 -- SQLBook: Code
 -- Write your own code!
-
-
+SELECT nationality, driver_id
+FROM drivers
+WHERE victories > 60;
 
 -- SQLBook: Markup
 # <span style="color:darkblue"> III. Groupby + Chaining </span>
@@ -206,7 +214,8 @@ SELECT nationality,
        MIN(victories) AS min_victories,
        MAX(victories) AS max_victories
 FROM drivers
-GROUP BY nationality;
+GROUP BY nationality
+HAVING SUM(victories) > 50;
 -- SQLBook: Markup
 <font size = "5">
 
