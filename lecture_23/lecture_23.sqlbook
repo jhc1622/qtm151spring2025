@@ -247,7 +247,7 @@ SELECT nationality,
        SUM(victories) AS sum_victories,
        AVG(victories) AS mean_victories,
        MIN(victories) AS min_victories,
-       MAX(victories) AS max_victories
+       MAX(victories) AS max_victories   
 FROM drivers
 WHERE nationality = 'German'
 GROUP BY nationality
